@@ -1,4 +1,4 @@
-const SHA256 = requires('crypto-js/sha256');
+const SHA256 = require('crypto-js/sha256');
 
 class Block{
     constructor(index, timestamp, data, precedingHash = ''){
@@ -18,7 +18,7 @@ class Block{
             this.timestamp +
             JSON.stringify(this.data) +
             this.nonce
-        ).toSring();
+        ).toString();
     }
 
 
@@ -73,6 +73,27 @@ class Blockchain {
 
 let newBlockchain = new Blockchain();
 
+newBlockchain.addNewBlock(
+    new Block(1, '22/11/2020', {
+        sender: 'Cristopher Paiva',
+        recipient: 'Martin Paiva',
+        quantity: 50
+
+    })
+);
+
+
+newBlockchain.addNewBlock(
+    new Block(1, '22/11/2020', {
+        sender: 'Martin Paiva',
+        recipient: 'Natanael Paiva',
+        quantity: 100
+
+    })
+);
+
 
 
 console.log(JSON.stringify(newBlockchain, null, 4));
+
+console.log(newBlockchain.checkChainValidity());
